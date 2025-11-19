@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 import {
   Button,
+  Input,
+  Label,
   Modal,
   ModalContent,
   ModalDescription,
@@ -399,7 +401,7 @@ export function OAuthRequiredModal({
                   id='snowflake-account-url'
                   placeholder='xy12345.us-east-1.snowflakecomputing.com'
                   value={snowflakeAccountUrl}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSnowflakeAccountUrl(e.target.value)
                     setAccountUrlError('')
                   }}
@@ -421,7 +423,7 @@ export function OAuthRequiredModal({
                   type='text'
                   placeholder='Enter OAuth Client ID'
                   value={snowflakeClientId}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSnowflakeClientId(e.target.value)
                     setClientIdError('')
                   }}
@@ -442,7 +444,7 @@ export function OAuthRequiredModal({
                   type='password'
                   placeholder='Enter OAuth Client Secret'
                   value={snowflakeClientSecret}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setSnowflakeClientSecret(e.target.value)
                     setClientSecretError('')
                   }}
