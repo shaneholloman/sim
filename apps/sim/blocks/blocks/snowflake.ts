@@ -218,7 +218,8 @@ SELECT * FROM database.schema.table AT (TIMESTAMP => '2024-01-01 00:00:00'::TIME
 
 ### REMEMBER
 Return ONLY the SQL query - no explanations, no markdown code blocks, no extra text. The query should be ready to execute.`,
-        placeholder: 'Describe the SQL query you need (e.g., "Get all orders from the last 7 days with customer names")...',
+        placeholder:
+          'Describe the SQL query you need (e.g., "Get all orders from the last 7 days with customer names")...',
         generationType: 'sql-query',
       },
     },
@@ -474,9 +475,7 @@ Return ONLY the SQL query - no explanations, no markdown code blocks, no extra t
 
           case 'insert_rows': {
             if (!params.database || !params.schema || !params.table) {
-              throw new Error(
-                'Database, Schema, and Table are required for insert_rows operation'
-              )
+              throw new Error('Database, Schema, and Table are required for insert_rows operation')
             }
             if (!params.columns || !params.values) {
               throw new Error('Columns and Values are required for insert_rows operation')
@@ -513,9 +512,7 @@ Return ONLY the SQL query - no explanations, no markdown code blocks, no extra t
 
           case 'update_rows': {
             if (!params.database || !params.schema || !params.table) {
-              throw new Error(
-                'Database, Schema, and Table are required for update_rows operation'
-              )
+              throw new Error('Database, Schema, and Table are required for update_rows operation')
             }
             if (!params.updates) {
               throw new Error('Updates object is required for update_rows operation')
@@ -542,9 +539,7 @@ Return ONLY the SQL query - no explanations, no markdown code blocks, no extra t
 
           case 'delete_rows': {
             if (!params.database || !params.schema || !params.table) {
-              throw new Error(
-                'Database, Schema, and Table are required for delete_rows operation'
-              )
+              throw new Error('Database, Schema, and Table are required for delete_rows operation')
             }
 
             baseParams.database = params.database
@@ -578,7 +573,10 @@ Return ONLY the SQL query - no explanations, no markdown code blocks, no extra t
     table: { type: 'string', description: 'Table name' },
     columns: { type: 'json', description: 'Array of column names for insert operation' },
     values: { type: 'json', description: 'Array of arrays containing values for insert operation' },
-    updates: { type: 'json', description: 'Object containing column-value pairs for update operation' },
+    updates: {
+      type: 'json',
+      description: 'Object containing column-value pairs for update operation',
+    },
     whereClause: { type: 'string', description: 'WHERE clause for update/delete operations' },
     timeout: { type: 'string', description: 'Query timeout in seconds' },
   },
@@ -591,4 +589,3 @@ Return ONLY the SQL query - no explanations, no markdown code blocks, no extra t
     },
   },
 }
-

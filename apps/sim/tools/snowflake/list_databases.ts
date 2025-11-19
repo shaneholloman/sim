@@ -1,10 +1,10 @@
 import { createLogger } from '@/lib/logs/console/logger'
-import type { ToolConfig } from '@/tools/types'
 import type {
   SnowflakeListDatabasesParams,
   SnowflakeListDatabasesResponse,
 } from '@/tools/snowflake/types'
 import { extractResponseData, parseAccountUrl } from '@/tools/snowflake/utils'
+import type { ToolConfig } from '@/tools/types'
 
 const logger = createLogger('SnowflakeListDatabasesTool')
 
@@ -33,8 +33,7 @@ export const snowflakeListDatabasesTool: ToolConfig<
       type: 'string',
       required: true,
       visibility: 'user-only',
-      description:
-        'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
+      description: 'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
     },
     warehouse: {
       type: 'string',
@@ -112,4 +111,3 @@ export const snowflakeListDatabasesTool: ToolConfig<
     },
   },
 }
-

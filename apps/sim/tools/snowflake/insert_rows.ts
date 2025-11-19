@@ -1,10 +1,10 @@
 import { createLogger } from '@/lib/logs/console/logger'
-import type { ToolConfig } from '@/tools/types'
 import type {
   SnowflakeInsertRowsParams,
   SnowflakeInsertRowsResponse,
 } from '@/tools/snowflake/types'
-import { extractResponseData, parseAccountUrl } from '@/tools/snowflake/utils'
+import { parseAccountUrl } from '@/tools/snowflake/utils'
+import type { ToolConfig } from '@/tools/types'
 
 const logger = createLogger('SnowflakeInsertRowsTool')
 
@@ -20,7 +20,7 @@ function buildInsertSQL(
 ): string {
   const fullTableName = `${database}.${schema}.${table}`
   const columnList = columns.join(', ')
-  
+
   // Build values clause for multiple rows
   const valuesClause = values
     .map((rowValues) => {
@@ -69,8 +69,7 @@ export const snowflakeInsertRowsTool: ToolConfig<
       type: 'string',
       required: true,
       visibility: 'user-only',
-      description:
-        'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
+      description: 'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
     },
     database: {
       type: 'string',
@@ -230,4 +229,3 @@ export const snowflakeInsertRowsTool: ToolConfig<
     },
   },
 }
-

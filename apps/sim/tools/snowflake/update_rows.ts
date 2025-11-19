@@ -1,10 +1,10 @@
 import { createLogger } from '@/lib/logs/console/logger'
-import type { ToolConfig } from '@/tools/types'
 import type {
   SnowflakeUpdateRowsParams,
   SnowflakeUpdateRowsResponse,
 } from '@/tools/snowflake/types'
-import { extractResponseData, parseAccountUrl } from '@/tools/snowflake/utils'
+import { parseAccountUrl } from '@/tools/snowflake/utils'
+import type { ToolConfig } from '@/tools/types'
 
 const logger = createLogger('SnowflakeUpdateRowsTool')
 
@@ -19,12 +19,12 @@ function buildUpdateSQL(
   whereClause?: string
 ): string {
   const fullTableName = `${database}.${schema}.${table}`
-  
+
   // Build SET clause
   const setClause = Object.entries(updates)
     .map(([column, value]) => {
       let formattedValue: string
-      
+
       if (value === null || value === undefined) {
         formattedValue = 'NULL'
       } else if (typeof value === 'string') {
@@ -35,15 +35,15 @@ function buildUpdateSQL(
       } else {
         formattedValue = String(value)
       }
-      
+
       return `${column} = ${formattedValue}`
     })
     .join(', ')
 
   let sql = `UPDATE ${fullTableName} SET ${setClause}`
-  
+
   // Add WHERE clause if provided
-  if (whereClause && whereClause.trim()) {
+  if (whereClause?.trim()) {
     sql += ` WHERE ${whereClause}`
   }
 
@@ -75,8 +75,7 @@ export const snowflakeUpdateRowsTool: ToolConfig<
       type: 'string',
       required: true,
       visibility: 'user-only',
-      description:
-        'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
+      description: 'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
     },
     database: {
       type: 'string',
@@ -143,7 +142,11 @@ export const snowflakeUpdateRowsTool: ToolConfig<
     }),
     body: (params: SnowflakeUpdateRowsParams) => {
       // Validate inputs
-      if (!params.updates || typeof params.updates !== 'object' || Object.keys(params.updates).length === 0) {
+      if (
+        !params.updates ||
+        typeof params.updates !== 'object' ||
+        Object.keys(params.updates).length === 0
+      ) {
         throw new Error('Updates must be a non-empty object with column-value pairs')
       }
 
@@ -228,4 +231,3 @@ export const snowflakeUpdateRowsTool: ToolConfig<
     },
   },
 }
-

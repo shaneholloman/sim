@@ -140,4 +140,3 @@ export function extractColumnMetadata(response: any): Array<{ name: string; type
     type: col.type,
   }))
 }
-

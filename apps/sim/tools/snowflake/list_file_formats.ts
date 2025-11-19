@@ -1,10 +1,10 @@
 import { createLogger } from '@/lib/logs/console/logger'
-import type { ToolConfig } from '@/tools/types'
 import type {
   SnowflakeListFileFormatsParams,
   SnowflakeListFileFormatsResponse,
 } from '@/tools/snowflake/types'
 import { extractResponseData, parseAccountUrl } from '@/tools/snowflake/utils'
+import type { ToolConfig } from '@/tools/types'
 
 const logger = createLogger('SnowflakeListFileFormatsTool')
 
@@ -33,8 +33,7 @@ export const snowflakeListFileFormatsTool: ToolConfig<
       type: 'string',
       required: true,
       visibility: 'user-only',
-      description:
-        'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
+      description: 'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
     },
     database: {
       type: 'string',
@@ -124,4 +123,3 @@ export const snowflakeListFileFormatsTool: ToolConfig<
     },
   },
 }
-

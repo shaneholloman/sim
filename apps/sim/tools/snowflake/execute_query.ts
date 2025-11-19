@@ -1,15 +1,14 @@
 import { createLogger } from '@/lib/logs/console/logger'
-import type { ToolConfig } from '@/tools/types'
 import type {
   SnowflakeExecuteQueryParams,
   SnowflakeExecuteQueryResponse,
 } from '@/tools/snowflake/types'
 import {
-  executeSnowflakeStatement,
   extractColumnMetadata,
   extractResponseData,
   parseAccountUrl,
 } from '@/tools/snowflake/utils'
+import type { ToolConfig } from '@/tools/types'
 
 const logger = createLogger('SnowflakeExecuteQueryTool')
 
@@ -38,8 +37,7 @@ export const snowflakeExecuteQueryTool: ToolConfig<
       type: 'string',
       required: true,
       visibility: 'user-only',
-      description:
-        'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
+      description: 'Your Snowflake account URL (e.g., xy12345.us-east-1.snowflakecomputing.com)',
     },
     query: {
       type: 'string',
@@ -155,4 +153,3 @@ export const snowflakeExecuteQueryTool: ToolConfig<
     },
   },
 }
-

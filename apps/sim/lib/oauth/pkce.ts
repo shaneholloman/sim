@@ -28,4 +28,3 @@ function base64URLEncode(buffer: Uint8Array): string {
   const base64 = btoa(String.fromCharCode(...buffer))
   return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
 }
-
